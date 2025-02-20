@@ -1,0 +1,22 @@
+{% set name = "blender" %}
+{% set version = "4.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: /pkgs_repo/src/blender-{{ version }}-linux64.tar.gz
+
+build:
+  number: 0
+  skip: True  # [not linux]
+  script:
+    - tar -C $PREFIX -xf $SRC_DIR/blender-{{ version }}-linux64.tar.gz
+    - mkdir -p $PREFIX/bin
+    - ln -s $PREFIX/blender-{{ version }}-linux-x64/blender $PREFIX/bin/blender 
+
+about:
+  home: https://www.blender.org/
+  license: GPL-3.0-or-later
+  summary: "Blender is an open-source 3D creation suite."
