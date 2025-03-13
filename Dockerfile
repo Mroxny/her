@@ -3,7 +3,7 @@ FROM ghcr.io/selkies-project/nvidia-egl-desktop:24.04-20241222100454
 ENV HOME /home/ubuntu
 WORKDIR $HOME
 RUN chown -R ubuntu $HOME
-COPY --chown=ubuntu ./miniconda.sh ${HOME}/miniconda3/
+COPY --chown=ubuntu ./scripts/miniconda.sh ${HOME}/miniconda3/
 
 # Install conda
 RUN bash ${HOME}/miniconda3/miniconda.sh -b -u -p ${HOME}/miniconda3 && \
