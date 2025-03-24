@@ -22,7 +22,7 @@ RUN ${HOME}/miniconda3/bin/conda init --all
 
 
 # Config channels
-ARG CHANNEL_ADDR="http://10.20.1.139:8000/"
+ARG CHANNEL_ADDR="https://example.here/"
 
 RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
  ${HOME}/miniconda3/bin/conda install -y conda-build && \
