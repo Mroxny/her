@@ -32,6 +32,8 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
 
 # Install programs
 ARG PACKAGE_LIST="git"
+USER root
 
 RUN ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST} && \
     ${HOME}/miniconda3/bin/conda clean -y --force-pkgs-dirs --all
+USER ubuntu
