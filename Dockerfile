@@ -10,9 +10,10 @@ ARG CONDA_VERSION="py39_25.1.1-2"
 
 RUN mkdir ${HOME}/miniconda3/ && \ 
     wget https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O ${HOME}/miniconda3/miniconda.sh && \ 
-    checksum_string=$(sha256sum ${HOME}/miniconda3/miniconda.sh) \
-    && wget -O miniconda_hashes.html "https://repo.anaconda.com/miniconda/" && \
-    if grep -q $checksum_string miniconda_hashes.html; then \
+    checksum_string=$(sha256sum ${HOME}/miniconda3/miniconda.sh) && \
+    wget -O miniconda_hashes.html "https://repo.anaconda.com/miniconda/"
+    
+RUN if grep -q "$checksum_string" miniconda_hashes.html; then \
         echo "Miniconda checksum verified." ; \
     else \
         echo "Miniconda checksum was not verified. Exiting." ; exit 1; \
