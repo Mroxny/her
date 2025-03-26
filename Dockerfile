@@ -22,11 +22,11 @@ RUN if grep -q "$checksum_string" miniconda_hashes.html; then \
 
 
 # Config channels
-ARG CHANNEL_ADDR="https://example.here/"
+ARG CONDA_CHANNEL_ADDR="https://example.here/"
 
 RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
     ${HOME}/miniconda3/bin/conda install -y conda-build && \
-    ${HOME}/miniconda3/bin/conda config --add channels ${CHANNEL_ADDR} && \
+    ${HOME}/miniconda3/bin/conda config --add channels ${CONDA_CHANNEL_ADDR} && \
     ${HOME}/miniconda3/bin/conda config --set channel_priority strict
 
 
