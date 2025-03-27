@@ -3,6 +3,7 @@ FROM ghcr.io/selkies-project/nvidia-egl-desktop:24.04-20241222100454
 ENV HOME=/home/ubuntu
 WORKDIR $HOME
 RUN chown -R ubuntu $HOME
+USER ubuntu 
 
 
 # Install conda
@@ -29,6 +30,7 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
     ${HOME}/miniconda3/bin/conda config --add channels ${CONDA_CHANNEL_ADDR} && \
     ${HOME}/miniconda3/bin/conda config --set channel_priority strict
 
+# RUN chown -R ubuntu $HOME
 
 # Install programs
 ARG PACKAGE_LIST="git"
