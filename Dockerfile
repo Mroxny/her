@@ -1,10 +1,7 @@
 FROM ghcr.io/selkies-project/nvidia-egl-desktop:24.04-20241222100454
 
-USER root
-RUN chown -R ubuntu /home/ubuntu
-
-USER ubuntu
 ENV HOME=/home/ubuntu
+RUN chown -R ubuntu $HOME
 WORKDIR $HOME
 
 
@@ -35,9 +32,9 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
 
 
 # Install programs
-USER root
-RUN rm /home/ubuntu/miniconda3/conda-meta/.wh.conda-25.1.1-py39h06a4308_0.json || true
-USER ubuntu
+# USER root
+RUN rm -rf ${HOME}/.conda
+# USER ubuntu
 
 ARG PACKAGE_LIST="git"
 RUN ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
