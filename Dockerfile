@@ -17,8 +17,9 @@ RUN if grep -q "$checksum_string" miniconda_hashes.html; then \
         echo "Miniconda checksum verified." ; \
     else \
         echo "Miniconda checksum was not verified. Exiting." ; exit 1; \
-    fi && \
-    bash ${HOME}/miniconda3/miniconda.sh -b -u -p ${HOME}/miniconda3 && \
+    fi
+    
+RUN bash ${HOME}/miniconda3/miniconda.sh -b -u -p ${HOME}/miniconda3 && \
     rm ${HOME}/miniconda3/miniconda.sh && \
     ${HOME}/miniconda3/bin/activate && ${HOME}/miniconda3/bin/conda init --all
 
