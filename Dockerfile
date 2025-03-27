@@ -34,5 +34,5 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
 # Install programs
 
 ARG PACKAGE_LIST="git"
-RUN sleep 10 && ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
+RUN chown -R ubuntu $HOME && ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
 
