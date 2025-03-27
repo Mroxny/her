@@ -1,4 +1,4 @@
-FROM ghcr.io/selkies-project/nvidia-egl-desktop:24.04-20241222100454
+FROM ghcr.io/selkies-project/nvidia-egl-desktop:22.04
 
 ENV HOME=/home/ubuntu
 RUN chown -R ubuntu $HOME
@@ -32,10 +32,7 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
 
 
 # Install programs
-# USER root
-RUN rm -rf ${HOME}/.conda
-# USER ubuntu
 
 ARG PACKAGE_LIST="git"
-RUN ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
+RUN sleep 10 && ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
 
