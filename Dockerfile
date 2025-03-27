@@ -33,13 +33,12 @@ RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \
     ${HOME}/miniconda3/bin/conda config --add channels ${CONDA_CHANNEL_ADDR} && \
     ${HOME}/miniconda3/bin/conda config --set channel_priority strict
 
-    
+
 # Install programs
+# USER root
+# RUN rm /home/ubuntu/miniconda3/conda-meta/.wh.conda-25.1.1-py39h06a4308_0.json
+# USER ubuntu
+
 ARG PACKAGE_LIST="git"
-USER root
+RUN ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
 
-RUN ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST} && \
-    ${HOME}/miniconda3/bin/conda clean -y --force-pkgs-dirs --all
-RUN chown -R ubuntu $HOME
-
-USER ubuntu
