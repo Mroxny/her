@@ -7,8 +7,7 @@ WORKDIR $HOME
 # Install conda
 ARG CONDA_VERSION="py39_25.1.1-2"
 
-RUN apt update && apt install -y sudo &&\ 
-    chown -R ubuntu $HOME && \ 
+RUN chown -R ubuntu $HOME && \ 
     mkdir ${HOME}/miniconda3/ && \ 
     wget https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O ${HOME}/miniconda3/miniconda.sh && \ 
     checksum_string=$(sha256sum ${HOME}/miniconda3/miniconda.sh) && \ 
