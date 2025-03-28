@@ -6,7 +6,6 @@ WORKDIR $HOME
 
 # Install conda
 ARG CONDA_VERSION="py39_25.1.1-2"
-ARG CONDA_CHANNEL_ADDR="https://example.here/"
 
 RUN apt update && apt install sudo &&\ 
     chown -R ubuntu $HOME && \ 
@@ -22,8 +21,13 @@ RUN apt update && apt install sudo &&\
     bash ${HOME}/miniconda3/miniconda.sh -b -u -p ${HOME}/miniconda3 && \ 
     rm ${HOME}/miniconda3/miniconda.sh && \
     ${HOME}/miniconda3/bin/activate && \ 
-    ${HOME}/miniconda3/bin/conda init --all && \ 
-    ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \ 
+    ${HOME}/miniconda3/bin/conda init --all
+
+
+# Config channels
+ARG CONDA_CHANNEL_ADDR="https://example.here/"
+
+RUN ${HOME}/miniconda3/bin/conda config --set ssl_verify False && \ 
     ${HOME}/miniconda3/bin/conda install -y conda-build && \ 
     ${HOME}/miniconda3/bin/conda config --add channels ${CONDA_CHANNEL_ADDR} && \ 
     ${HOME}/miniconda3/bin/conda config --set channel_priority strict
@@ -31,5 +35,6 @@ RUN apt update && apt install sudo &&\
 
 # Install programs
 ARG PACKAGE_LIST="git"
-RUN sudo ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
+RUN sudo ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST} && \
+    sudo ${HOME}/miniconda3/bin/conda clean -y --force-pkgs-dirs --all
 
