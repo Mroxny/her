@@ -7,7 +7,6 @@ WORKDIR $HOME
 # Install conda
 ARG CONDA_VERSION="py39_25.1.1-2"
 ARG CONDA_CHANNEL_ADDR="https://example.here/"
-ARG PACKAGE_LIST="git"
 
 RUN apt update && apt install sudo &&\ 
     chown -R ubuntu $HOME && \ 
@@ -31,6 +30,6 @@ RUN apt update && apt install sudo &&\
 
 
 # Install programs
-
+ARG PACKAGE_LIST="git"
 RUN sudo ${HOME}/miniconda3/bin/conda install -y ${PACKAGE_LIST}
 
